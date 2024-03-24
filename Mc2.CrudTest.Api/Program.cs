@@ -1,5 +1,8 @@
+using Mc2.CrudTest.Api.Behaviors;
 using Mc2.CrudTest.Api.Data;
 using Mc2.CrudTest.Api.Services;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Api
 {
@@ -11,16 +14,19 @@ namespace Mc2.CrudTest.Api
 
             // Add services to the container.
             builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //builder.Services.AddScoped<ICrudService, CrudService>(); 
+            builder.Services.AddScoped<ICrudService, CrudService>();
 
-            //builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
             var app = builder.Build();
 

@@ -25,11 +25,11 @@ namespace Mc2.CrudTest.Api
             return new CustomerResponse { Result = result};
         }
 
-        public async Task<CustomerResponse> Delete(Customer customer)
-        {
-            var result = await _service.DeleteAsync(customer);
-            return new CustomerResponse { Result = result };
-        }
+        //public async Task<CustomerResponse> Delete(Customer customer)
+        //{
+        //    var result = await _service.DeleteAsync(customer);
+        //    return new CustomerResponse { Result = result };
+        //}
 
         public async Task<CustomerResponse> GetByEmail(string email)
         {

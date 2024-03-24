@@ -6,7 +6,7 @@ namespace Mc2.CrudTest.Api.Services
 	{
         Task<int> InsertAsync(Customer smsOtp);
         Task<bool> UpdateAsync(Customer smsOtp);
-        Task<bool> DeleteAsync(Customer customer);
+        Task<bool> DeleteAsync(int id);
         Task<List<Customer>> GetAllAsync();
         Task<Customer> GetByEmailAsync(string email);
     }

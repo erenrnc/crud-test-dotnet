@@ -34,13 +34,18 @@ namespace Mc2.CrudTest.Api.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(Customer customer)
+        public async Task<bool> DeleteAsync(int id)
         {
             try
             {
-                _applicationDbContext.Customers.Remove(customer);
-                await _applicationDbContext.SaveChangesAsync();
-                return true;
+                var customer = await _applicationDbContext.Customers.FindAsync(id);
+                if (customer != null)
+                {
+                    _applicationDbContext.Customers.Remove(customer);
+                    await _applicationDbContext.SaveChangesAsync();
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {
