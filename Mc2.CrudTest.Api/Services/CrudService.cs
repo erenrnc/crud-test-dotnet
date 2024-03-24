@@ -55,17 +55,17 @@ namespace Mc2.CrudTest.Api.Services
 
         public async Task<List<Customer>> GetAllAsync()
         {
-            var lastEmailOtp = await _applicationDbContext.Customers.ToListAsync();
-            return lastEmailOtp;
+            var customers = await _applicationDbContext.Customers.ToListAsync();
+            return customers;
         }
 
         public async Task<Customer> GetByEmailAsync(string email)
         {
-            var lastEmailOtp = await _applicationDbContext.Customers
+            var customer = await _applicationDbContext.Customers
                 .OrderByDescending(i => i.Id)
                 .Where(i => i.Email.Equals(email))
                 .FirstOrDefaultAsync();
-            return lastEmailOtp;
+            return customer;
         }
     }
 }

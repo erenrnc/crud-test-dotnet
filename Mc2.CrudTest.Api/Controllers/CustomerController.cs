@@ -44,7 +44,7 @@ namespace Mc2.CrudTest.Api.Controllers
         [HttpPut("update")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
-        public async Task<IActionResult> update(CustomerRequest request)
+        public async Task<IActionResult> update(CustomerUpdateRequest request)
         {
             //CustomerSender sender = new CustomerSender(_service);
             //var response = await sender.Update(_mapper.Map<Customer>(request));

@@ -9,6 +9,9 @@ namespace Mc2.CrudTest.Api.Mapper
         {
             CreateMap<Customer, CustomerRequest>();
             CreateMap<CustomerRequest, Customer>();
+
+            CreateMap<Customer, CustomerUpdateRequest>();
+            CreateMap<CustomerUpdateRequest, Customer>();
         }
     }
 }

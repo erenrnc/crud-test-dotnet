@@ -1,5 +1,8 @@
 ﻿using Mc2.CrudTest.Api.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Reflection.Emit;
 
 namespace Mc2.CrudTest.Api.Data
 {
