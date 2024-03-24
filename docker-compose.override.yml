@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+
+  pg-data:
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=dockerf
+    volumes:
+      - crudtest-pgdata:/var/lib/postgresql/10/main
+    restart: always
+
+  customer-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "9090:80"
+
+volumes:
+  crudtest-pgdata:
+    external: false

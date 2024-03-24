@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{89759C6E-84F1-4A47-A87E-3F1EB0C04764}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Server", "Mc2.CrudTest.Presentation\Server\Mc2.CrudTest.Presentation.Server.csproj", "{D2AD2F7D-C1E0-4C84-A2A4-6900CED15599}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Client", "Mc2.CrudTest.Presentation\Client\Mc2.CrudTest.Presentation.Client.csproj", "{817C1B83-0CAC-4345-A0BE-5CCF30B15C26}"
@@ -39,6 +41,10 @@ Global
 		{EA66B785-CE28-4405-AB7F-78BA6409F4DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA66B785-CE28-4405-AB7F-78BA6409F4DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA66B785-CE28-4405-AB7F-78BA6409F4DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89759C6E-84F1-4A47-A87E-3F1EB0C04764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89759C6E-84F1-4A47-A87E-3F1EB0C04764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89759C6E-84F1-4A47-A87E-3F1EB0C04764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89759C6E-84F1-4A47-A87E-3F1EB0C04764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
