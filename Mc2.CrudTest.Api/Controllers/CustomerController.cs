@@ -54,7 +54,7 @@ namespace Mc2.CrudTest.Api.Controllers
             return StatusCode(201);
         }
 
-        [HttpDelete("{id:int}", Name = "delete")]
+        [HttpDelete("{id}", Name = "delete")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public async Task<IActionResult> delete(int id)
@@ -66,7 +66,7 @@ namespace Mc2.CrudTest.Api.Controllers
             return NoContent();
         }
 
-        [HttpGet("{email:string}", Name = "getbyemail")]
+        [HttpGet("{email}", Name = "getbyemail")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         public async Task<IActionResult> getbyemail(string email)
