@@ -105,10 +105,10 @@ this.ScenarioInitialize(scenarioInfo);
     testRunner.Given("the API is running", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
-    testRunner.When("I add a customer with the name \"John Doe\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When("I add a customer with the name \"John Doe 10\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
-    testRunner.Then("the customer \"John Doe\" should be added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("the customer \"John Doe 10\" should be added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -148,7 +148,7 @@ this.ScenarioInitialize(scenarioInfo);
     testRunner.When("I retrieve the list of customers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
-    testRunner.Then("the list should contain the customer \"John Doe\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("the list should contain the name \"John Doe 10\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

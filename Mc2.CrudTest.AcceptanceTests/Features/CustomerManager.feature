@@ -4,10 +4,10 @@
 
 Scenario: Add a customer
     Given the API is running
-    When I add a customer with the name "John Doe"
-    Then the customer "John Doe" should be added
+    When I add a customer with the name "John Doe 10"
+    Then the customer "John Doe 10" should be added
 
 Scenario: Retrieve customers
     Given the API is running
     When I retrieve the list of customers
-    Then the list should contain the customer "John Doe"
+    Then the list should contain the name "John Doe 10"

@@ -29,7 +29,7 @@ namespace Mc2.CrudTest.Api.Validator
             {
                 return false;
             }
-
+            //For example, it would match 123456, 9876543210, but not 12345 or 12345678901
             return _accountNumberRegex.IsMatch(accountNumber);
         }
     }

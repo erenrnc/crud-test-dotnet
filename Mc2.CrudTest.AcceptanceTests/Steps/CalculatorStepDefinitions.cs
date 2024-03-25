@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json;
 using FluentAssertions;
 
 
@@ -27,8 +28,16 @@ public sealed class CalculatorStepDefinitions
     [When(@"I add a customer with the name ""(.*)""")]
     public async Task WhenIAddACustomerWithTheName(string customerName)
     {
-        _customerToAdd = customerName;
-        var content = new StringContent(customerName, Encoding.UTF8, "application/json");
+        Customer customer = new Customer
+        {
+            FirstName = customerName,
+            PhoneNumber = "+902123456789",
+            BankAccountNumber = "123456",
+            DateOfBirth = DateTime.Now,
+            Email = "test1@test.com",
+            LastName = customerName
+        };
+        var content = new StringContent(JsonSerializer.Serialize(customer), Encoding.UTF8, "application/json");
         _response = await _client.PostAsync("http://localhost:9090/api/insert", content);
         _response.EnsureSuccessStatusCode();
     }
@@ -36,10 +45,25 @@ public sealed class CalculatorStepDefinitions
     [Then(@"the customer ""(.*)"" should be added")]
     public async Task ThenTheCustomerShouldBeAdded(string customerName)
     {
-        var response = await _client.GetAsync("http://localhost:9090/api/insert");
+        var response = await _client.GetAsync("http://localhost:9090/api/getall");
         response.EnsureSuccessStatusCode();
-        var customers = await response.Content.ReadAsAsync<List<string>>();
-        customers.Should().Contain(customerName);
+        var customers = await response.Content.ReadAsAsync<List<Customer>>();
+        customers.Select(x => x.FirstName).Should().Contain(customerName);
+    }
+
+    [When(@"I retrieve the list of customers")]
+    public async Task WhenIRetrieveTheListOfCustomers()
+    {
+        // Assume I received
+    }
+
+    [Then(@"the list should contain the name ""(.*)""")]
+    public async Task ThenTheListShouldContainTheName(string customerName)
+    {
+        var response = await _client.GetAsync("http://localhost:9090/api/getall");
+        response.EnsureSuccessStatusCode();
+        var customers = await response.Content.ReadAsAsync<List<Customer>>();
+        customers.Select(x => x.FirstName).Should().Contain(customerName);
     }
 
     //private readonly ScenarioContext _scenarioContext;
@@ -71,4 +95,14 @@ public sealed class CalculatorStepDefinitions
 
     //    _scenarioContext.Pending();
     //}
+}
+
+public class Customer
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string PhoneNumber { get; set; }
+    public string Email { get; set; }
+    public string BankAccountNumber { get; set; }
 }
