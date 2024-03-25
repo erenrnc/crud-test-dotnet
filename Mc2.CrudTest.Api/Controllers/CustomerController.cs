@@ -1,10 +1,12 @@
 using AutoMapper;
+using FluentValidation;
 using Mc2.CrudTest.Api.Commands;
 using Mc2.CrudTest.Api.Models;
 using Mc2.CrudTest.Api.Queries;
 using Mc2.CrudTest.Api.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Mc2.CrudTest.Api.Controllers
 {
@@ -16,16 +18,19 @@ namespace Mc2.CrudTest.Api.Controllers
         //private readonly ICrudService _service;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
+        private readonly IValidator<Customer> _validator;
 
         public CustomerController(ILogger<CustomerController> logger,
-            //ICrudService service,
+        //ICrudService service,
             IMapper mapper,
-            IMediator mediator)
+            IMediator mediator,
+            IValidator<Customer> validator)
         {
             _logger = logger;
             //_service = service;
             _mapper = mapper;
-            _mediator = mediator;
+            _mediator = mediator; 
+            _validator = validator;
         }
 
         [HttpPost("insert")]
@@ -36,8 +41,15 @@ namespace Mc2.CrudTest.Api.Controllers
             //CustomerSender sender = new CustomerSender(_service);
             //var response = await sender.Insert(_mapper.Map<Customer>(request));
             //return Ok(response);
+            var map = _mapper.Map<Customer>(request);
 
-            await _mediator.Send(new AddCustomerCommand(_mapper.Map<Customer>(request)));
+            var validationResult = _validator.Validate(map);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            await _mediator.Send(new AddCustomerCommand(map));
             return StatusCode(201);
         }
 
@@ -50,7 +62,15 @@ namespace Mc2.CrudTest.Api.Controllers
             //var response = await sender.Update(_mapper.Map<Customer>(request));
             //return Ok(response);
 
-            await _mediator.Send(new UpdateCustomerCommand(_mapper.Map<Customer>(request)));
+            var map = _mapper.Map<Customer>(request);
+
+            var validationResult = _validator.Validate(map);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            await _mediator.Send(new UpdateCustomerCommand(map));
             return StatusCode(201);
         }
 

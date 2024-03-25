@@ -1,6 +1,8 @@
+using FluentValidation;
 using Mc2.CrudTest.Api.Behaviors;
 using Mc2.CrudTest.Api.Data;
 using Mc2.CrudTest.Api.Services;
+using Mc2.CrudTest.Api.Validator;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +29,8 @@ namespace Mc2.CrudTest.Api
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+            builder.Services.AddValidatorsFromAssemblyContaining<CustomerValidator>();
 
             var app = builder.Build();
 

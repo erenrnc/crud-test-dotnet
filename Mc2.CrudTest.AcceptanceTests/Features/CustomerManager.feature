@@ -1,9 +1,13 @@
-﻿Feature: Customer Manager
+﻿Feature: customers API
+    As a customer of the API
+    I want to be able to retrieve and add customers
 
-As a an operator I wish to be able to Create, Update, Delete customers and list all customers
-	
-@mytag
-Scenario: Operator creates, list, update and delete customers 
-	Given to be filled...
-	When to be filled...
-	Then to be filled...
+Scenario: Add a customer
+    Given the API is running
+    When I add a customer with the name "John Doe"
+    Then the customer "John Doe" should be added
+
+Scenario: Retrieve customers
+    Given the API is running
+    When I retrieve the list of customers
+    Then the list should contain the customer "John Doe"
