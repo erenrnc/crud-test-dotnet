@@ -9,6 +9,7 @@ namespace Mc2.CrudTest.Api.Services
         Task<bool> DeleteAsync(int id);
         Task<List<Customer>> GetAllAsync();
         Task<Customer> GetByEmailAsync(string email);
+        Task<bool> CheckCustomer(Customer customer);
     }
 }
 

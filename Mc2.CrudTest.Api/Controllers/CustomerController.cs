@@ -15,19 +15,19 @@ namespace Mc2.CrudTest.Api.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
-        //private readonly ICrudService _service;
+        private readonly ICrudService _service;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
         private readonly IValidator<Customer> _validator;
 
         public CustomerController(ILogger<CustomerController> logger,
-        //ICrudService service,
+            ICrudService service,
             IMapper mapper,
             IMediator mediator,
             IValidator<Customer> validator)
         {
             _logger = logger;
-            //_service = service;
+            _service = service;
             _mapper = mapper;
             _mediator = mediator; 
             _validator = validator;
@@ -41,6 +41,14 @@ namespace Mc2.CrudTest.Api.Controllers
             //CustomerSender sender = new CustomerSender(_service);
             //var response = await sender.Insert(_mapper.Map<Customer>(request));
             //return Ok(response);
+//            {
+//                "firstName": "string4",
+            //  "lastName": "string4",
+            //  "dateOfBirth": "2000-03-25T11:43:20.283Z",
+            //  "phoneNumber": "+902123456789",
+            //  "email": "test4@test4.com",
+            //  "bankAccountNumber": "123456"
+            //}
             var map = _mapper.Map<Customer>(request);
 
             var validationResult = _validator.Validate(map);
@@ -48,7 +56,10 @@ namespace Mc2.CrudTest.Api.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-
+            if (await _service.CheckCustomer(map))
+            {
+                return BadRequest("This customer is contain");
+            }
             await _mediator.Send(new AddCustomerCommand(map));
             return StatusCode(201);
         }
@@ -68,6 +79,11 @@ namespace Mc2.CrudTest.Api.Controllers
             if (!validationResult.IsValid)
             {
                 return BadRequest(validationResult.Errors);
+            }
+
+            if (await _service.CheckCustomer(map))
+            {
+                return BadRequest("This customer is contain");
             }
 
             await _mediator.Send(new UpdateCustomerCommand(map));

@@ -67,6 +67,15 @@ namespace Mc2.CrudTest.Api.Services
                 .FirstOrDefaultAsync();
             return customer;
         }
+
+        public async Task<bool> CheckCustomer(Customer customer)
+        {
+           return await _applicationDbContext.Customers.AnyAsync(c =>
+            c.Email == customer.Email &&
+            c.FirstName == customer.FirstName &&
+            c.LastName == customer.LastName &&
+            c.DateOfBirth == customer.DateOfBirth);
+        }
     }
 }
 
