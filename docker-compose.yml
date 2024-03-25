@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+
+  pg-data:
+    container_name: "pg-data"
+    image: postgres
+    
+  customer-api:
+    container_name: "mc2.crudtest.api"
+    image: ${DOCKER_REGISTRY-}mc2.crudtest.api
+    build:
+      context: . 
+      dockerfile: Mc2.CrudTest.Api/Dockerfile
+    depends_on:
+      - pg-data  
